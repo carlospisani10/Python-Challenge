@@ -30,24 +30,74 @@ with open(csvpath, newline='') as csvfile:
     #variables
     max_change = max(revchange)
     big_loss = min(revchange)
-    max_date = None
+    max_month = None
+    loss_month = None
 
-    print(max_change)
-    for r in csvlist::
-        if r == max_change:
-            max_date = i[0]
 
-    print(max_date)
-    print(len(dates))
-    print(mean(revchange))
-    print(max(revchange))
-    print(min(revchange))
    
+   #nested for loop to iterate the values in revenues within the csv list iteration
+    #for row in csvlist:
+        #for i in range(len(revenues)-1):
+            #if revenues[i+1] - revenues[i] == max_change:
+                #max_month = row[0]
+    
+    #for row in csvlist:
+        # for i in range(len(revenues)-1):
+            #if revenues[i+1] - revenues[i] == big_loss:
+                #print(revenues[i+1] - revenues[i])
+                #loss_month = row[0]
+   
+    # external rev value, maybe none to start
+    #for row in csvlist:
+        # if none
+            # set external revenue val
+            # skip rest of loop, go to next iteration
+        # if diff == big loss
+            # do stuff
+        # store current rev val in external rev val
+    
+#check to see if variable is done
+    
+    initial_val = None
+    for row in csvlist:
+        if initial_val is None:
+            initial_val = int(row[1])
+            print(initial_val)
+            continue
+        if int(row[1]) - initial_val == big_loss:
+            loss_month = row[0]
+        intial_val = int(row[1])
+
+    initial_val2 = None
+    for row in csvlist:
+        if initial_val2 is None:
+            initial_val2 = int(row[1])
+            continue
+        if int(row[1]) - initial_val == max_change:
+            max_month = row[0]
+            intial_val = int(row[1])
+    
+    print(loss_month)
+    print(max_month)
+        
+
+            
+    
+
+    
+   
+
+    #print all values required
+    #print(len(dates))
+    #print(mean(revchange))
+    #print(f"The biggest loss {big_loss}")
+    #print(max_month)
+    #print(loss_month)
+    #print(max_change)
+   #
     
 
  
-
-
 
   
         
