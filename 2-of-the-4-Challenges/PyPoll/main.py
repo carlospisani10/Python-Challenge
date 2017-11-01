@@ -15,38 +15,49 @@ with open(csvpath, newline='') as csvfile:
    #lists
     voterid = []
     county = []
-    candidate = []
+    candidates = []
     
     #run for loop for every row
     for dog in csvreader:
         voterid.append(dog[0])
         county.append(dog[1])
-        candidate.append(dog[2])
+        candidates.append(dog[2])
     
     #find a unique set of canditates, and the total vote. Counter is a neat command
-    can_set = set(candidate)    
+    can_set = set(candidates)    
     tot_vote = len(voterid)
-    cnt = Counter(candidate)
+    cnt = Counter(candidates)
 
     #create a list with the unique names
-    names = []
+    can_names = []
     
     for row in can_set:  
-        names.append(row)
+        can_names.append(row)
 
+    print("Election Results")
+    print("----------------------------------------")
+    print(f"The total number of votes was {tot_vote}")
+    print("----------------------------------------")
 
-    #Print the Total Votes
+    dictionary_can = {}
+    can_count = 0
+    for row in can_names:
+        candidate_name = str(can_names[can_count])
+        votes = candidates.count(candidate_name)
+        votes = int(votes)
+        percentage = round(votes / tot_vote * 100, 2)
+        dictionary_can.update({ candidate_name : votes})
+        print(f"{candidate_name}: {percentage}%  ({votes} votes)" )
+        can_count = can_count + 1
 
-    print("Results for Election")
-    print("Total number of votes:" + str(tot_vote))
-    print(names)
+    import operator
 
+    winner = max(dictionary_can, key=lambda key: dictionary_can[key])
+    
+    print("Winner: ", winner)
 
+  
 
-    #create a loop that prints the vote count and vote percentage for each 
-    print(tot_vote)
-    print(names)
-    print(cnt)
     
    
  

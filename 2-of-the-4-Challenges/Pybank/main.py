@@ -30,23 +30,11 @@ with open(csvpath, newline='') as csvfile:
     #variables
     max_change = max(revchange)
     big_loss = min(revchange)
+    avg_change = mean(revchange)
+    total_month = len(dates)
     max_month = None
     loss_month = None
 
-
-   
-   #nested for loop to iterate the values in revenues within the csv list iteration
-    #for row in csvlist:
-        #for i in range(len(revenues)-1):
-            #if revenues[i+1] - revenues[i] == max_change:
-                #max_month = row[0]
-    
-    #for row in csvlist:
-        # for i in range(len(revenues)-1):
-            #if revenues[i+1] - revenues[i] == big_loss:
-                #print(revenues[i+1] - revenues[i])
-                #loss_month = row[0]
-   
     # external rev value, maybe none to start
     #for row in csvlist:
         # if none
@@ -56,30 +44,33 @@ with open(csvpath, newline='') as csvfile:
             # do stuff
         # store current rev val in external rev val
     
-#check to see if variable is done
-    
+    #for loop to find corresponding date 
     initial_val = None
     for row in csvlist:
         if initial_val is None:
             initial_val = int(row[1])
-            print(initial_val)
             continue
         if int(row[1]) - initial_val == big_loss:
             loss_month = row[0]
-        intial_val = int(row[1])
+        initial_val = int(row[1])
 
     initial_val2 = None
     for row in csvlist:
         if initial_val2 is None:
             initial_val2 = int(row[1])
             continue
-        if int(row[1]) - initial_val == max_change:
+        if abs(int(row[1]) - initial_val2) == max_change:
             max_month = row[0]
-            intial_val = int(row[1])
+        initial_val2 = int(row[1])
     
-    print(loss_month)
-    print(max_month)
-        
+
+    print("Financial Analysis")
+    print("-----------------------------------------------------------------------------")
+    print(f"The financial analysis occured over {total_month} months")
+    print(f"The average revenue change was ${avg_change}")
+    print(f"The maximum revenue gain was ${max_change} and occured on {max_month}")
+    print(f"The biggest revenue loss was ${big_loss} and occured on {loss_month}")
+
 
             
     
@@ -87,15 +78,35 @@ with open(csvpath, newline='') as csvfile:
     
    
 
-    #print all values required
-    #print(len(dates))
-    #print(mean(revchange))
-    #print(f"The biggest loss {big_loss}")
-    #print(max_month)
-    #print(loss_month)
-    #print(max_change)
    #
     
+
+ 
+
+  
+        
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
 

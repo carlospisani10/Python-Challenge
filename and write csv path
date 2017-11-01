@@ -1,0 +1,121 @@
+warning: CRLF will be replaced by LF in 2-of-the-4-Challenges/Pybank/main.py.
+The file will have its original line endings in your working directory.
+[1mdiff --git a/2-of-the-4-Challenges/Pybank/main.py b/2-of-the-4-Challenges/Pybank/main.py[m
+[1mindex b170134..5d2df97 100644[m
+[1m--- a/2-of-the-4-Challenges/Pybank/main.py[m
+[1m+++ b/2-of-the-4-Challenges/Pybank/main.py[m
+[36m@@ -62,7 +62,6 @@[m [mwith open(csvpath, newline='') as csvfile:[m
+     for row in csvlist:[m
+         if initial_val is None:[m
+             initial_val = int(row[1])[m
+[31m-            print(initial_val)[m
+             continue[m
+         if int(row[1]) - initial_val == big_loss:[m
+             loss_month = row[0][m
+[36m@@ -97,7 +96,105 @@[m [mwith open(csvpath, newline='') as csvfile:[m
+    #[m
+     [m
+ [m
+[31m- [m
+[32m+[m[32m #import os and write csv path[m
+[32m+[m[32mfrom statistics import mean[m
+[32m+[m[32mimport os[m
+[32m+[m[32mcsvpath = os.path.join("CSV", "budget_data_1.csv")[m[41m [m
+[32m+[m
+[32m+[m[32m#Improved Reading using CSV module[m
+[32m+[m[32mimport csv[m
+[32m+[m[32mwith open(csvpath, newline='') as csvfile:[m
+[32m+[m
+[32m+[m[32m    # CSV reader delimiter and varaiable[m
+[32m+[m[32m    csvreader = csv.reader(csvfile, delimiter=',')[m
+[32m+[m[32m    next(csvreader,None)[m
+[32m+[m[32m    csvlist = list(csvreader)[m
+[32m+[m
+[32m+[m[32m    #list creation, places to store csv "rows" (They are columns!)[m
+[32m+[m[32m    dates = [][m
+[32m+[m[32m    revenues = [][m
+[32m+[m
+[32m+[m[32m    #run for loop for every row[m
+[32m+[m[32m    for dog in csvlist:[m
+[32m+[m[32m        dates.append(dog[0])[m
+[32m+[m[32m        revenues.append(int(dog[1]))[m
+[32m+[m[41m    [m
+[32m+[m[32m    #create a list for revenue change[m
+[32m+[m[32m    revchange = [][m
+[32m+[m
+[32m+[m[32m    #run loop through revenues list to find the change revenues from month[m
+[32m+[m[32m    revchange = [revenues[i+1] - revenues[i] for i in range(len(revenues) -1)][m
+[32m+[m[41m    [m
+[32m+[m[32m    #variables[m
+[32m+[m[32m    max_change = max(revchange)[m
+[32m+[m[32m    big_loss = min(revchange)[m
+[32m+[m[32m    max_month = None[m
+[32m+[m[32m    loss_month = None[m
+[32m+[m
+[32m+[m
+[32m+[m[41m   [m
+[32m+[m[32m   #nested for loop to iterate the values in revenues within the csv list iteration[m
+[32m+[m[32m    #for row in csvlist:[m
+[32m+[m[32m        #for i in range(len(revenues)-1):[m
+[32m+[m[32m            #if revenues[i+1] - revenues[i] == max_change:[m
+[32m+[m[32m                #max_month = row[0][m
+[32m+[m[41m    [m
+[32m+[m[32m    #for row in csvlist:[m
+[32m+[m[32m        # for i in range(len(revenues)-1):[m
+[32m+[m[32m            #if revenues[i+1] - revenues[i] == big_loss:[m
+[32m+[m[32m                #print(revenues[i+1] - revenues[i])[m
+[32m+[m[32m                #loss_month = row[0][m
+[32m+[m[41m   [m
+[32m+[m[32m    # external rev value, maybe none to start[m
+[32m+[m[32m    #for row in csvlist:[m
+[32m+[m[32m        # if none[m
+[32m+[m[32m            # set external revenue val[m
+[32m+[m[32m            # skip rest of loop, go to next iteration[m
+[32m+[m[32m        # if diff == big loss[m
+[32m+[m[32m            # do stuff[m
+[32m+[m[32m        # store current rev val in external rev val[m
+[32m+[m[41m    [m
+[32m+[m[32m#check to see if variable is done[m
+[32m+[m[41m    [m
+[32m+[m[32m    initial_val = None[m
+[32m+[m[32m    for row in csvlist:[m
+[32m+[m[32m        if initial_val is None:[m
+[32m+[m[32m            initial_val = int(row[1])[m
+[32m+[m[32m            continue[m
+[32m+[m[32m        if int(row[1]) - initial_val == big_loss:[m
+[32m+[m[32m            loss_month = row[0][m
+[32m+[m[32m        initial_val = int(row[1])[m
+[32m+[m
+[32m+[m[32m    initial_val2 = None[m
+[32m+[m[32m    for row in csvlist:[m
+[32m+[m[32m        if initial_val2 is None:[m
+[32m+[m[32m            initial_val2 = int(row[1])[m
+[32m+[m[32m            continue[m
+[32m+[m[32m        if abs(int(row[1]) - initial_val) == max_change:[m
+[32m+[m[32m            max_month = row[0][m
+[32m+[m[32m        initial_val2 = int(row[1])[m
+[32m+[m[41m    [m
+[32m+[m[32m    print(loss_month)[m
+[32m+[m[32m    print(max_month)[m
+[32m+[m[32m    print(max_change)[m
+[32m+[m[32m    print(big_loss)[m
+[32m+[m
+[32m+[m
+[32m+[m[41m            [m
+[32m+[m[41m    [m
+[32m+[m
+[32m+[m[41m    [m
+[32m+[m[41m   [m
+[32m+[m
+[32m+[m[32m    #print all values required[m
+[32m+[m[32m    #print(len(dates))[m
+[32m+[m[32m    #print(mean(revchange))[m
+[32m+[m[32m    #print(f"The biggest loss {big_loss}")[m
+[32m+[m[32m    #print(max_month)[m
+[32m+[m[32m    #print(loss_month)[m
+[32m+[m[32m    #print(max_change)[m
+[32m+[m[32m   #[m
+[32m+[m[41m    [m
+ [m
+   [m
+         [m
